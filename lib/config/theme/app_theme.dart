@@ -29,7 +29,10 @@ TextTheme get appTextTheme {
     headlineSmall: TextStyle(fontSize: 20.sp, color: AppColors.black),
     displayLarge: TextStyle(fontSize: 18.sp, color: AppColors.white),
     displayMedium: TextStyle(fontSize: 16.sp, color: AppColors.black),
-    displaySmall: TextStyle(fontSize: 14.sp, color: AppColors.darkGrey),
+    displaySmall: TextStyle(
+      fontSize: 14.sp,
+      color: AppColors.darkGrey.withValues(alpha: 0.5),
+    ),
     bodySmall: TextStyle(fontSize: 12.sp, color: AppColors.white),
   );
 }
