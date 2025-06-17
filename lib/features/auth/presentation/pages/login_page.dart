@@ -46,11 +46,11 @@ class _LoginPageState extends State<LoginPage> {
         child: SingleChildScrollView(
           child: Center(
             child: Form(
-              key: _formKey,
+              key: _formKey, // Form key used for validation
               child: Column(
                 children: [
                   SizedBox(height: screenHeight * 0.11),
-                  // App logo centered in the layout
+                  // App logo
                   Image.asset(
                     AppImages.appLogo,
                     height: screenHeight * 0.41,
@@ -58,16 +58,16 @@ class _LoginPageState extends State<LoginPage> {
                         screenHeight *
                         0.41, // Using height value for width ensures a square shape
                   ),
-
-                  SizedBox(
-                    child: CustomTextFormField(
-                      hintText: 'mail',
-                      icon: Icons.mail_outline,
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                    ),
+                  // Email input field
+                  CustomTextFormField(
+                    hintText: 'mail',
+                    icon: Icons.mail_outline,
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(height: 12),
+
+                  // Password input field
                   CustomTextFormField(
                     hintText: 'password',
                     icon: Icons.lock_outline,
@@ -76,6 +76,8 @@ class _LoginPageState extends State<LoginPage> {
                     textInputAction: TextInputAction.done,
                   ),
                   const SizedBox(height: 24),
+
+                  // Login button
                   SizedBox(
                     width: double.infinity,
                     child: DefaultElevatedButton(
@@ -88,6 +90,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 16),
+
+                  // Navigate to signup
                   TextButton(
                     onPressed: () {
                       context.pushReplacementNamed(AppRouter.signupPageName);

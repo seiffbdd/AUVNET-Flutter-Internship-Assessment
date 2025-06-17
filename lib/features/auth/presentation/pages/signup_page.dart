@@ -17,14 +17,14 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
-  late final TextEditingController _ensurePasswordController;
+  late final TextEditingController _confirmPasswordController;
   late final GlobalKey<FormState> _formKey;
 
   @override
   void initState() {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
-    _ensurePasswordController = TextEditingController();
+    _confirmPasswordController = TextEditingController();
     _formKey = GlobalKey<FormState>();
 
     super.initState();
@@ -34,7 +34,7 @@ class _SignupPageState extends State<SignupPage> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _ensurePasswordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -48,11 +48,11 @@ class _SignupPageState extends State<SignupPage> {
         child: SingleChildScrollView(
           child: Center(
             child: Form(
-              key: _formKey,
+              key: _formKey, // Form key used for validation
               child: Column(
                 children: [
                   SizedBox(height: screenHeight * 0.05),
-                  // App logo centered in the layout
+                  // App logo
                   Image.asset(
                     AppImages.appLogo,
                     height: screenHeight * 0.41,
@@ -60,15 +60,15 @@ class _SignupPageState extends State<SignupPage> {
                         screenHeight *
                         0.41, // Using height value for width ensures a square shape
                   ),
-
-                  SizedBox(
-                    child: CustomTextFormField(
-                      hintText: 'mail',
-                      icon: Icons.mail_outline,
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                    ),
+                  // Email input field
+                  CustomTextFormField(
+                    hintText: 'mail',
+                    icon: Icons.mail_outline,
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
                   ),
+
+                  // Password input field
                   const SizedBox(height: 12),
                   CustomTextFormField(
                     hintText: 'password',
@@ -79,23 +79,26 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   const SizedBox(height: 12),
 
+                  // Confirm password field with validation
                   CustomTextFormField(
                     hintText: 'password',
                     icon: Icons.lock_outline,
                     obscureText: true,
-                    controller: _ensurePasswordController,
+                    controller: _confirmPasswordController,
                     textInputAction: TextInputAction.done,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field can\'t be empty';
                       } else if (_passwordController.text !=
-                          _ensurePasswordController.text) {
+                          _confirmPasswordController.text) {
                         return 'Password doesn\'t match';
                       }
                       return null;
                     },
                   ),
                   const SizedBox(height: 16),
+
+                  // Signup button
                   SizedBox(
                     width: double.infinity,
                     child: DefaultElevatedButton(
@@ -108,6 +111,8 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
                   const SizedBox(height: 12),
+
+                  // Redirect to login page
                   TextButton(
                     onPressed: () {
                       context.pushReplacementNamed(AppRouter.loginPageName);
@@ -131,6 +136,5 @@ class _SignupPageState extends State<SignupPage> {
         ),
       ),
     );
-    ;
   }
 }
