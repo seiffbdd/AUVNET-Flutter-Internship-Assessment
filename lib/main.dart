@@ -1,12 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nawel/config/routes/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nawel/config/theme/app_theme.dart';
 import 'package:nawel/core/utils/service_locator.dart';
+import 'package:nawel/firebase_options.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await setup(); // await for the logic in the service locator
   runApp(const MyApp());
 }
