@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "675290864991",
+    "project_id": "nawelapp-eeec3",
+    "storage_bucket": "nawelapp-eeec3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:675290864991:android:a36113e9ab946788efaaea",
+        "android_client_info": {
+          "package_name": "com.example.nawel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvytjnxv4wDzkD7_BJiTFhpbyRkDZf46Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
