@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
+  final String? Function(String?)? validator;
   const CustomTextFormField({
     super.key,
     required this.hintText,
@@ -18,6 +19,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.controller,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
+    this.validator,
   });
 
   @override
@@ -25,12 +27,14 @@ class CustomTextFormField extends StatelessWidget {
     return SizedBox(
       width: 300.w,
       child: TextFormField(
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'This field can\'t be empty';
-          }
-          return null;
-        },
+        validator:
+            validator ??
+            (value) {
+              if (value == null || value.isEmpty) {
+                return 'This field can\'t be empty';
+              }
+              return null;
+            },
         controller: controller,
         style: GoogleFonts.mulish(
           textStyle: Theme.of(context).textTheme.displayMedium,
