@@ -3,6 +3,7 @@ import 'package:nawel/core/storage/shared_prefs_helper.dart';
 import 'package:nawel/features/auth/data/data_sources/auth_firebase_service.dart';
 import 'package:nawel/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:nawel/features/auth/domain/repos/auth_repo.dart';
+import 'package:nawel/features/auth/domain/use_cases/login_use_case.dart';
 import 'package:nawel/features/auth/domain/use_cases/signup_use_case.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,6 +16,7 @@ Future<void> setup() async {
   locator.registerSingleton<SharedPrefsHelper>(SharedPrefsHelper(sharedPrefs));
 
   // Services
+
   locator.registerSingleton<AuthFirebaseService>(AuthFirebaseServiceImpl());
 
   // repos
@@ -24,4 +26,6 @@ Future<void> setup() async {
   // UseCases
 
   locator.registerSingleton<SignupUseCase>(SignupUseCase());
+
+  locator.registerSingleton<LoginUseCase>(LoginUseCase());
 }
