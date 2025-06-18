@@ -5,6 +5,10 @@ import 'package:nawel/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:nawel/features/auth/domain/repos/auth_repo.dart';
 import 'package:nawel/features/auth/domain/use_cases/login_use_case.dart';
 import 'package:nawel/features/auth/domain/use_cases/signup_use_case.dart';
+import 'package:nawel/features/splash/data/data_sources/splash_firebase_service.dart';
+import 'package:nawel/features/splash/data/repos/splash_repo_impl.dart';
+import 'package:nawel/features/splash/domain/repos/splash_repo.dart';
+import 'package:nawel/features/splash/domain/use_cases/listen_to_auth_changes_use_case.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final locator = GetIt.instance;
@@ -19,13 +23,21 @@ Future<void> setup() async {
 
   locator.registerSingleton<AuthFirebaseService>(AuthFirebaseServiceImpl());
 
+  locator.registerSingleton<SplashFirebaseService>(SplashFirebaseServiceImpl());
+
   // repos
 
   locator.registerSingleton<AuthRepo>(AuthRepoImpl());
+
+  locator.registerSingleton<SplashRepo>(SplashRepoImpl());
 
   // UseCases
 
   locator.registerSingleton<SignupUseCase>(SignupUseCase());
 
   locator.registerSingleton<LoginUseCase>(LoginUseCase());
+
+  locator.registerSingleton<ListenToAuthChangesUseCase>(
+    ListenToAuthChangesUseCase(),
+  );
 }
