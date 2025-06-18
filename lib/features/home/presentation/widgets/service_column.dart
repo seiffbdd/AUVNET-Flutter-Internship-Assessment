@@ -23,7 +23,10 @@ class ServiceColumn extends StatelessWidget {
           width: 105.w,
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
           color: AppColors.lightGrey,
-          child: CachedNetworkImage(imageUrl: image),
+          child: CachedNetworkImage(
+            imageUrl: image,
+            placeholder: (context, url) => Placeholder(),
+          ),
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
