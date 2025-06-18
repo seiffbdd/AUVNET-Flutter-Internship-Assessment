@@ -30,6 +30,8 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
         errMessage = 'The password provided is too weak.';
       } else if (e.code == 'email-already-in-use') {
         errMessage = 'The account already exists for that email.';
+      } else {
+        errMessage = e.code;
       }
       debugPrint(errMessage);
       return left(errMessage);
@@ -54,6 +56,8 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
         errMessage = 'No user found for that email.';
       } else if (e.code == 'wrong-password') {
         errMessage = 'Wrong password provided for that user.';
+      } else {
+        errMessage = e.code;
       }
       debugPrint(errMessage);
       return Left(errMessage);

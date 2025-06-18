@@ -2,5 +2,5 @@
 /// [Type] is the return type of the use case.
 /// [Params] is the type of parameters required to execute the use case.
 abstract class Usecase<Type, Params> {
-  Future<Type> call({Params params});
+  Future<Type> call({Params? params});
 }

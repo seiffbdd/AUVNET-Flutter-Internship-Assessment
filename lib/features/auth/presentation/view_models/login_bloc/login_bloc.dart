@@ -1,25 +1,22 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:nawel/core/utils/service_locator.dart';
 import 'package:nawel/features/auth/data/models/user_model.dart';
-import 'package:nawel/features/auth/domain/use_cases/signup_use_case.dart';
+import 'package:nawel/features/auth/domain/use_cases/login_use_case.dart';
 
-part 'signup_event.dart';
-part 'signup_state.dart';
+part 'login_event.dart';
+part 'login_state.dart';
 
-class SignupBloc extends Bloc<SignupEvent, SignupState> {
-  SignupBloc() : super(SignupState.initial()) {
-    on<SignupSubmitted>((event, emit) async {
+class LoginBloc extends Bloc<LoginEvent, LoginState> {
+  LoginBloc() : super(LoginState.initial()) {
+    on<LoginSubmitted>((event, emit) async {
       emit(state.copyWith(isLoading: true, errMessage: null, isSuccess: false));
-      final result = await locator.get<SignupUseCase>().call(
+      final result = await locator.get<LoginUseCase>().call(
         params: UserModel(email: event.email, password: event.password),
       );
 
       result.fold(
         (failure) {
-          log(failure);
           emit(state.copyWith(isLoading: false, errMessage: failure));
         },
         (message) {
@@ -27,8 +24,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         },
       );
     });
-    on<SignupReset>((event, emit) {
-      emit(SignupState.initial());
+    on<LoginReset>((event, emit) {
+      emit(LoginState.initial());
     });
   }
 }

@@ -2,8 +2,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nawel/features/auth/presentation/pages/login_page.dart';
 import 'package:nawel/features/auth/presentation/pages/signup_page.dart';
+import 'package:nawel/features/auth/presentation/view_models/login_bloc/login_bloc.dart';
 import 'package:nawel/features/auth/presentation/view_models/signup_bloc/signup_bloc.dart';
 import 'package:nawel/features/home/presentation/pages/home_page.dart';
+import 'package:nawel/features/home/presentation/view_models/home_cubit/home_cubit.dart';
 import 'package:nawel/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:nawel/features/splash/presentation/pages/splash_page.dart';
 import 'package:nawel/features/splash/presentation/view_models/splash_cubit/splash_cubit.dart';
@@ -45,7 +47,11 @@ abstract class AppRouter {
       GoRoute(
         name: loginPageName,
         path: loginPagePath,
-        builder: (context, state) => LoginPage(),
+        builder:
+            (context, state) => BlocProvider(
+              create: (context) => LoginBloc(),
+              child: LoginPage(),
+            ),
       ),
       GoRoute(
         name: signupPageName,
@@ -59,7 +65,11 @@ abstract class AppRouter {
       GoRoute(
         name: homePageName,
         path: homePagePath,
-        builder: (context, state) => HomePage(),
+        builder:
+            (context, state) => BlocProvider(
+              create: (context) => HomeCubit(),
+              child: HomePage(),
+            ),
       ),
     ],
   );
