@@ -6,6 +6,7 @@ import 'package:nawel/features/auth/data/models/user_model.dart';
 /// Abstract service class for Firebase Authentication.
 abstract class AuthFirebaseService {
   Future<Either<String, String>> signup({required UserModel user});
+  Future<Either<String, String>> login({required UserModel user});
 }
 
 class AuthFirebaseServiceImpl extends AuthFirebaseService {
@@ -32,6 +33,30 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
       }
       debugPrint(errMessage);
       return left(errMessage);
+    } catch (e) {
+      debugPrint(e.toString());
+      return left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, String>> login({required UserModel user}) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: user.email,
+        password: user.password,
+      );
+      return right('Signed up succfully');
+    } on FirebaseAuthException catch (e) {
+      late String errMessage;
+
+      if (e.code == 'user-not-found') {
+        errMessage = 'No user found for that email.';
+      } else if (e.code == 'wrong-password') {
+        errMessage = 'Wrong password provided for that user.';
+      }
+      debugPrint(errMessage);
+      return Left(errMessage);
     } catch (e) {
       debugPrint(e.toString());
       return left(e.toString());
